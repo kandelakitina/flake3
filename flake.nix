@@ -1,5 +1,5 @@
 {
-  description = "Boticelli's NixOS Config Flake 3";
+  description = "Boticelli's NixOS Config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -69,10 +69,10 @@
       inherit inputs;
       src = ./.;
       snowfall = {
-        metadata = "Venus";
-        namespace = "Venus";
+        metadata = "nixicle";
+        namespace = "nixicle";
         meta = {
-          name = "Venus";
+          name = "nixicle";
           title = "Boticelli's Nix Flake";
         };
       };
