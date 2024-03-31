@@ -17,20 +17,20 @@ with lib.nixicle; let
 in {
   options.cli.programs.git = with types; {
     enable = mkBoolOpt false "Whether or not to enable git.";
-    email = mkOpt (nullOr str) "hello@haseebmajid.dev" "The email to use with git.";
+    email = mkOpt (nullOr str) "kandelakitina@gmail.com" "The email to use with git.";
     urlRewrites = mkOpt (attrsOf str) {} "url we need to rewrite i.e. ssh to http";
   };
 
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
-      userName = "Haseeb Majid";
+      userName = "boticelli";
       userEmail = cfg.email;
 
-      signing = {
-        signByDefault = true;
-        key = "D528 BD50 F4E9 F031 AACB 1F7A 9833 E49C 848D 6C90";
-      };
+      # signing = {
+      #   signByDefault = true;
+      #   key = "D528 BD50 F4E9 F031 AACB 1F7A 9833 E49C 848D 6C90";
+      # };
 
       extraConfig =
         {

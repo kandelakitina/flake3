@@ -17,7 +17,7 @@ in {
         default_session = {
           command = "Hyprland";
           # TODO: make this configurable using snowfall username
-          user = "haseeb";
+          user = "boticelli";
         };
         initial_session = default_session;
       };

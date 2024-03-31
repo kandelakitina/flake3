@@ -36,7 +36,7 @@ in {
 
     # systemd.user.sockets.gpg-agent = {
     #   listenStreams = let
-    #     user = "haseeb";
+    #     user = "boticelli";
     #     socketDir =
     #       pkgs.runCommand "gnupg-socketdir" {
     #         nativeBuildInputs = [pkgs.python3];

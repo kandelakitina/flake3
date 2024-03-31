@@ -35,7 +35,7 @@ return {
 	enable_tab_bar = false,
 	-- term = "wezterm",
 	-- set_environment_variables = {
-	-- 	TERMINFO_DIRS = "/home/haseebmajid/.nix-profile/share/terminfo",
+	-- 	TERMINFO_DIRS = "/home/boticelli/.nix-profile/share/terminfo",
 	-- },
 	hyperlink_rules = wezterm.default_hyperlink_rules(),
 	window_padding = {

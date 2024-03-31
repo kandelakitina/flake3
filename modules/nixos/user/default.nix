@@ -10,7 +10,7 @@ with lib.nixicle; let
   cfg = config.user;
 in {
   options.user = with types; {
-    name = mkOpt str "haseeb" "The name of the user's account";
+    name = mkOpt str "boticelli" "The name of the user's account";
     initialPassword =
       mkOpt str "1"
       "The initial password to use";
@@ -21,11 +21,11 @@ in {
   };
 
   config = {
-    users.users.haseeb =
+    users.users.boticelli =
       {
         isNormalUser = true;
         inherit (cfg) name initialPassword;
-        home = "/home/haseeb";
+        home = "/home/boticelli";
         group = "users";
 
         extraGroups =
