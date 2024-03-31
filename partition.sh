@@ -1,34 +1,36 @@
 #!/bin/bash
 
-# Show the current block devices
-echo "Current block devices:"
+# 1. Show 'lsblk'
 lsblk
+echo ""
 
-# Navigate to the specified directory
-cd ./systems/x86_64-linux/ || exit
-
-# Create a numbered list of directories
+# 2. Show a list of folders in ./systems/x86_64-linux as a numbered list
 echo "List of systems:"
 i=1
-for d in */ ; do
-    echo "$i. ${d%/}" # Remove trailing slash
-    directories[i++]="${d%/}" # Store directory name without trailing slash
+for folder in ./systems/x86_64-linux/*; do
+    if [ -d "$folder" ]; then
+        echo "$i. $(basename "$folder")"
+        let i++
+    fi
 done
 
-# Ask the user to pick a system
-read -p "Pick a system by number: " choice
+# 3. Ask the user to pick a system
+echo "Pick a system: "
+read -r choice
 
-# Validate user input
-if [[ ! $choice =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "${#directories[@]}" ]; then
-    echo "Invalid choice. Exiting."
+# Validate input
+folders=(./systems/x86_64-linux/*)
+if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "${#folders[@]}" ]; then
+    echo "Invalid selection."
     exit 1
 fi
 
-# Run the disko command on the selected directory
-selected_directory=${directories[$choice]}
-echo "Running disko on $selected_directory..."
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko ./systems/x86_64-linux/"$selected_directory"/disks.nix
+# 4. Run the specified command with the selected folder
+selected_folder=$(basename "${folders[$choice-1]}")
+echo "Running disko for $selected_folder..."
 
-# Show the block devices after running disko
-echo "Block devices after running disko:"
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "./systems/x86_64-linux/$selected_folder/disks.nix"
+
+# 5. Show `lsblk` after disko does its job
+echo "Final lsblk state:"
 lsblk
